@@ -1,0 +1,128 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Skin Care Haven</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" (click)="onProductsClick()">Products</a>
+        </li>
+        <li>
+          <a class="nav-link" aria-current="page" (click)="onUsersClick()">Users</a>
+        </li>
+        <li>
+          <a class="nav-link" aria-current="page" (click)="onOrdersClick()">Orders</a>
+        </li>
+      </ul>
+
+      <form class="d-flex">
+
+        <a href="" class="btn btn-outline-success me-2" type="submit">Logout</a>
+      </form>
+    </div>
+  </div>
+</nav>
+<div *ngIf="areProductsVisible">
+  <a class="btn btn-primary m-4" (click)="onAddProductClick()">Add Product</a>
+  <div *ngIf="isAddFormDisplayed()">
+    <form>
+      <div class="text-center form-group">
+        <label class="d-block">Choose the Product image</label>
+        <input type="file" class="form-control-file" id="pictureInput" accept="image/jpg">
+        <input id="inputType" type="text" class="form-control w-25 mx-auto" placeholder="Type">
+        <input id="inputSkinType" type="text" class="form-control w-25 mx-auto" placeholder="Skin Type">
+        <input id="inputPrice" type="number" class="form-control w-25 mx-auto" placeholder="Price">
+        <input id="inputName" type="text" class="form-control w-25 mx-auto" placeholder="Name">
+        <input id="inputBrand" type="text" class="form-control w-25 mx-auto" placeholder="Brand">
+        <input id="inputStock" type="number" class="form-control w-25 mx-auto" placeholder="Stock">
+        <a class="btn btn-primary m-4" (click)="addProduct()">Add</a>
+      </div>
+    </form>
+  </div>
+  <h3 class="m-2">Products</h3>
+  <div class="d-flex flex-row justify-content-center flex-wrap m-2">
+    <div *ngFor="let product of products; index as indexOfelement;" class="card mt-3" style="width: 18rem;">
+      <!-- <img src="" class="card-img-top" alt="productImage"> -->
+      <div *ngIf="!isEditEnabled[indexOfelement]">
+        <div class="card-body">
+          <h5 class="card-title">ID:{{product.id}} {{product.name}}</h5>
+          <p class="card-text">{{product.brand}}</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">{{product.skintype}}</li>
+          <li class="list-group-item">{{product.type}}</li>
+          <li class="list-group-item">{{product.stock}}</li>
+          <li class="list-group-item">{{product.price}}</li>
+        </ul>
+
+        <div class="card-body">
+          <a class="btn btn-outline-secondary me-2" (click)="onEditClick(indexOfelement)">✏️</a>
+          <a class="btn btn-outline-danger" (click)="deleteProduct(product)">🗑️</a>
+        </div>
+      </div>
+      <div *ngIf="isEditEnabled[indexOfelement]">
+        <h5 class="card-title">ID:{{product.id}}</h5>
+        <input id="inputEditType" type="text" class="form-control mx-auto" placeholder="Type">
+        <input id="inputEditSkinType" type="text" class="form-control mx-auto" placeholder="Skin Type">
+        <input id="inputEditPrice" type="number" class="form-control mx-auto" placeholder="Price">
+        <input id="inputEditName" type="text" class="form-control mx-auto" placeholder="Name">
+        <input id="inputEditBrand" type="text" class="form-control mx-auto" placeholder="Brand">
+        <input id="inputEditStock" type="number" class="form-control mx-auto" placeholder="Stock">
+        <div class="card-body">
+          <a class="btn btn-outline-secondary me-2" (click)="editProduct(product, indexOfelement)">✔️</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="areUsersVisible">
+  <h3 class="m-2">Users</h3>
+  <div class="card m-3">
+    <table class="table">
+      <thead class="thead-light">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Surname</th>
+          <th scope="col">Type</th>
+          <th scope="col">Email</th>
+          <th scope="col">Budget</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <th scope="row">{{user.id_user}}</th>
+          <td>{{user.nume}}</td>
+          <td>{{user.prenume}}</td>
+          <td>{{user.type}}</td>
+          <td>{{user.email}}</td>
+          <td>{{user.budget}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div *ngIf="areOrdersVisible">
+  <h3 class="m-2">Orders</h3>
+  <div class="card m-3">
+    <table class="table">
+      <thead class="thead-light">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Client</th>
+          <th scope="col">Products Ordered</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of orders">
+          <th scope="row">{{order.order_Id}}</th>
+          <td>{{getUser(order)}}</td>
+          <td>{{getProducts(order)}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

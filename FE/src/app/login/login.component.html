@@ -1,0 +1,19 @@
+<div *ngIf="isLoginPageVisible">
+    <div *ngIf="!isSignUp()" class="center-screen">
+        <div class="card" style="width: 18rem; background-color: lightpink;">
+            <img src="../../assets/images/skincare1.png" class="card-img-top" alt="...">
+            <h5 class="card-title; text-center" style="color:palevioletred;">Login</h5>
+            <div class="card-body">
+                <div class="mb-3 row d-grid gap-2">
+                    <input id="inputEmail" type="email" class="form-control" placeholder="Email">
+                    <input id="inputPassword" type="password" class="form-control" placeholder="Password">
+                    <a class="btn btn-primary " style="background-color:palevioletred; border-color: black;"
+                        (click)="login()">Login</a>
+                    <a class="btn btn-primary " style="background-color:palevioletred; border-color: black;"
+                        (click)="onSignupClick()">Sign up</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <app-signup *ngIf="isSignUp()" [(isSignup)]="isSignup"></app-signup>
+</div>

@@ -1,0 +1,77 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" style="color: rgb(228, 97, 174)">SkinCare Haven</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" style="color: rgb(228, 97, 174)" aria-current="page"
+            (click)="onHomeClick()">Home</a>
+        </li>
+      </ul>
+      <form class="d-flex">
+        <input id="searchInput" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success me-2"
+          style="color: rgb(228, 97, 174);background-color: white; border-color: black;" type="button"
+          (click)="search()">Search</button>
+        <button class="btn btn-outline-success me-2"
+          style="color: rgb(228, 97, 174);background-color: white; border-color: black;" type="button"
+          (click)="onShoppingCartClick()">🛒
+          {{getAmountOfProductsInCart()}}</button>
+        <a href="" class="btn btn-outline-success me-2"
+          style="color: rgb(228, 97, 174);background-color: white; border-color: black;" type="submit">Logout</a>
+      </form>
+    </div>
+  </div>
+</nav>
+<div *ngIf="!isShoppingCartVisible">
+  <h3 class="m-2" style="color: rgb(228, 97, 174)">Products</h3>
+  <div class="d-flex flex-row justify-content-center flex-wrap m-2">
+    <div *ngFor="let product of products" class="card mt-3" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title" style="color: rgb(228, 97, 174)">ID:{{product.id}} {{product.name}}</h5>
+        <p class="card-text" style="color: rgb(228, 97, 174)">{{product.brand}}</p>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item" style="color: rgb(228, 97, 174)">{{product.skintype}}</li>
+        <li class="list-group-item" style="color: rgb(228, 97, 174)">{{product.type}}</li>
+        <li class="list-group-item" style="color: rgb(228, 97, 174)">{{product.stock}}</li>
+        <li class="list-group-item" style="color: rgb(228, 97, 174)">{{product.price}}</li>
+      </ul>
+      <div class="card-body" style="color: rgb(228, 97, 174)">
+        <button class="btn btn-outline-secondary me-2" style="color: rgb(228, 97, 174)" (click)="addToCart(product)">🛒
+          Add</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="isShoppingCartVisible">
+  <h3 class="m-2" style="color: rgb(228, 97, 174)">ShoppingCart</h3>
+  <div class="card m-3">
+    <table class="table">
+      <thead class="thead-light">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col" style="color: rgb(228, 97, 174)">Name</th>
+          <th scope="col" style="color: rgb(228, 97, 174)">Brand</th>
+          <th scope="col" style="color: rgb(228, 97, 174)">Price/Unit</th>
+          <th scope="col" style="color: rgb(228, 97, 174)">Quantity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of cart">
+          <th scope="row">{{item.product.id}}</th>
+          <td style="color: rgb(228, 97, 174)">{{item.product.name}}</td>
+          <td style="color: rgb(228, 97, 174)">{{item.product.brand}}</td>
+          <td style="color: rgb(228, 97, 174)">{{item.product.price}}</td>
+          <td style="color: rgb(228, 97, 174)">{{item.quantity}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <button class="btn btn-primary w-50 mx-auto mb-2" style="background-color: rgb(228, 97, 174); border-color: black;"
+      (click)="checkout()">Checkout</button>
+  </div>
+</div>

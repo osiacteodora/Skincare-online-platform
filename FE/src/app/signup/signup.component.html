@@ -1,0 +1,25 @@
+<div class="center-screen">
+  <div class="card" style="width: 18rem; background-color: lightpink;">
+    <img src="../../assets/images/SignUp.jpg" class="card-img-top" alt="..." style="height: 100px;">
+    <h5 class="card-title; text-center" style="color:palevioletred;">Login</h5>
+    <div class="card-body">
+      <div class="mb-3 row d-grid gap-2">
+        <input id="inputNume" type="text" class=form-control placeholder="Nume">
+        <input id="inputPrenume" type="text" class=form-control placeholder="Prenume">
+        <input id="inputBuget" type="number" class=form-control placeholder="Buget lunar">
+        <input id="inputEmail" type="email" class="form-control" placeholder="Email">
+        <input id="inputPassword" type="password" class="form-control" placeholder="Password">
+        <select id="inputType">
+          <option selected>Type</option>
+          <option value="admin">Admin</option>
+          <option value="client">Client</option>
+        </select>
+        <a href="#" class="btn btn-primary " style="background-color:palevioletred; border-color: black;"
+          (click)="register()">Sign Up</a>
+        <a href="#" class="btn btn-primary" style="background-color:palevioletred; border-color: black;"
+          (click)="onLoginClick()">Login</a>
+      </div>
+    </div>
+  </div>
+</div>
+<app-login *ngIf="isLoginClicked()"></app-login>
